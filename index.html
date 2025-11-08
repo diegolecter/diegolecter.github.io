@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BECKER INTELLIGENT SOLUTIONS LTDA — Sistemas, Design e Serviços Técnicos</title>
+  <meta name="description" content="Consultoria e desenvolvimento de sistemas computacionais, UX, nuvem e automação. Blumenau/SC. Projetos sob medida com foco em resultados mensuráveis." />
+  <meta name="color-scheme" content="light dark" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!--
+    Empresa: BECKER INTELLIGENT SOLUTIONS LTDA
+    E-mail: diego@beckerintelligentsolutions.org
+    Endereço: Rua Valentim Fortunato Bonelli, 158, 89037-820, Blumenau, Santa Catarina
+    CNAE/tema: Computer Systems Design and Related Services — Professional, Scientific, and Technical Services
+    Observação de compliance (Apple Guidelines):
+      - Sem coleta de telefone ou dados sensíveis.
+      - Transparência sobre uso de dados e consentimento explícito.
+      - Conteúdo adequado para todas as idades; sem rastreadores de terceiros.
+      - Acessibilidade: labels, aria, foco visível, contraste, navegação por teclado.
+  -->
+  <style>
+    :root{
+      --bg:#0b1016;
+      --panel:#101722;
+      --ink:#e7edf5;
+      --muted:#a7b3c2;
+      --brand:#62d3ff;
+      --brand-2:#7bffaf;
+      --accent:#c7ff6e;
+      --card:#121a26;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius:18px;
+      --ring:0 0 0 3px rgba(98,211,255,.35);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--ink);
+      background:linear-gradient(180deg, #0b1016 0%, #0e1420 60%, #0b1016 100%);
+      line-height:1.6;
+    }
+
+    /* Header */
+    header{
+      position:sticky; top:0; z-index:50;
+      background:rgba(11,16,22,.7);
+      backdrop-filter: saturate(140%) blur(12px);
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      max-width:1200px; margin:0 auto; padding:14px 20px;
+    }
+    .brand{
+      display:flex; gap:10px; align-items:center; text-decoration:none; color:var(--ink);
+      font-weight:700; letter-spacing:.2px;
+    }
+    .brand-badge{
+      width:34px;height:34px;border-radius:10px;
+      background:linear-gradient(135deg, var(--brand), var(--brand-2));
+      display:inline-grid;place-items:center;color:#001014;font-weight:900; box-shadow:var(--shadow)
+    }
+    nav a{
+      color:var(--muted); text-decoration:none; margin:0 10px; padding:8px 10px; border-radius:10px;
+      transition:.25s ease;
+    }
+    nav a:hover, nav a:focus{color:var(--ink); background:rgba(255,255,255,.06); outline:none; box-shadow:var(--ring)}
+    .cta{
+      background:linear-gradient(135deg, var(--brand), var(--accent));
+      color:#001014; padding:10px 16px; border:none; border-radius:12px; font-weight:700; cursor:pointer;
+      transition:transform .2s ease, box-shadow .2s ease;
+    }
+    .cta:hover, .cta:focus{transform:translateY(-1px); box-shadow:var(--shadow); outline:none}
+
+    /* Hero */
+    .hero{
+      position:relative; isolation:isolate;
+      min-height:70vh; display:grid; align-items:center;
+      background:
+        linear-gradient(180deg, rgba(10,14,20,.65) 0%, rgba(10,14,20,.65) 100%),
+        url('https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1920&auto=format&fit=crop') center/cover no-repeat fixed;
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .hero-inner{max-width:1200px; margin:0 auto; padding:80px 20px}
+    .pill{
+      display:inline-flex; gap:8px; align-items:center; font-size:.9rem; color:#061018;
+      background:linear-gradient(135deg, #aaf0ff, #c7ff6e);
+      padding:8px 12px; border-radius:999px; font-weight:800; letter-spacing:.3px;
+    }
+    h1{
+      font-size:clamp(2rem, 5vw, 3.2rem); line-height:1.1; margin:18px 0 12px;
+      max-width:900px; text-wrap:balance;
+    }
+    .subtitle{
+      color:var(--muted); max-width:900px; margin-bottom:28px; font-size:1.05rem;
+    }
+    .hero-actions{display:flex; gap:12px; flex-wrap:wrap}
+    .btn{
+      background:#182232; color:var(--ink); border:1px solid rgba(255,255,255,.08);
+      padding:12px 16px; border-radius:12px; cursor:pointer; transition:.25s ease; text-decoration:none; display:inline-flex; gap:8px; align-items:center;
+    }
+    .btn:hover, .btn:focus{background:#1d2a3f; outline:none; box-shadow:var(--ring)}
+    .btn-primary{background:linear-gradient(135deg, var(--brand), var(--brand-2)); color:#001014; border:none}
+    .btn-primary:hover, .btn-primary:focus{filter:saturate(115%)}
+
+    /* Section base */
+    section{padding:72px 20px}
+    .wrap{max-width:1200px; margin:0 auto}
+    .section-title{font-size:1.8rem; margin:0 0 10px}
+    .section-kicker{color:var(--muted); margin-bottom:28px}
+
+    /* Cards grid */
+    .grid{
+      display:grid; gap:18px;
+      grid-template-columns: repeat(12, 1fr);
+    }
+    .col-4{grid-column: span 4}
+    .col-6{grid-column: span 6}
+    .col-12{grid-column: span 12}
+
+    @media (max-width:1000px){
+      .col-4{grid-column: span 6}
+      .col-6{grid-column: span 12}
+    }
+    @media (max-width:700px){
+      .col-4,.col-6{grid-column: span 12}
+    }
+
+    .card{
+      background:var(--card);
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:var(--radius);
+      padding:22px;
+      box-shadow:var(--shadow);
+      transition: transform .2s ease, border-color .2s ease;
+    }
+    .card:hover{ transform: translateY(-3px); border-color: rgba(255,255,255,.12) }
+
+    .icon{
+      width:42px; height:42px; border-radius:12px;
+      display:inline-grid; place-items:center; font-weight:900; color:#091219;
+      background:linear-gradient(135deg, var(--brand), var(--brand-2));
+      box-shadow: var(--shadow);
+    }
+    .muted{color:var(--muted)}
+
+    /* Feature band (newsletter-styled) */
+    .band{
+      background:linear-gradient(180deg, #0a1320, #0a1118);
+      border-top:1px solid rgba(255,255,255,.06);
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .band-inner{
+      display:grid; grid-template-columns: 1.2fr .8fr; gap:20px;
+    }
+    @media (max-width:900px){ .band-inner{grid-template-columns:1fr} }
+
+    .input{
+      width:100%; padding:12px 14px; border-radius:12px; border:1px solid rgba(255,255,255,.14);
+      background:#0e1622; color:var(--ink);
+    }
+    .input:focus{outline:none; box-shadow:var(--ring); border-color:transparent}
+
+    /* Timeline / Process */
+    .timeline{
+      display:grid; gap:10px; grid-template-columns: repeat(12, 1fr);
+    }
+    .step{grid-column: span 4; position:relative; padding-left:18px}
+    .step:before{
+      content:""; position:absolute; left:0; top:10px; bottom:10px; width:4px;
+      background:linear-gradient(180deg, var(--brand), var(--accent));
+      border-radius:999px;
+    }
+
+    /* FAQ */
+    details{
+      background:#0f1724; border:1px solid rgba(255,255,255,.08); border-radius:14px; padding:16px 18px;
+    }
+    details[open]{background:#121b2b}
+    summary{cursor:pointer; font-weight:700}
+    summary:focus{outline:none}
+
+    /* Footer */
+    footer{
+      padding:50px 20px; border-top:1px solid rgba(255,255,255,.08);
+      color:var(--muted);
+    }
+
+    /* Modals */
+    .modal{
+      position:fixed; inset:0; display:none; align-items:center; justify-content:center;
+      background:rgba(4,8,12,.6); backdrop-filter: blur(6px);
+      z-index:100;
+    }
+    .modal[aria-hidden="false"]{ display:flex }
+    .modal-card{
+      background:#0f1724; border:1px solid rgba(255,255,255,.08);
+      border-radius:18px; width:min(620px, 92vw); padding:20px; box-shadow: var(--shadow)
+    }
+    .modal-head{display:flex; justify-content:space-between; align-items:center}
+    .close{
+      background:#152033; color:var(--ink); border:1px solid rgba(255,255,255,.06); border-radius:10px; padding:8px 10px; cursor:pointer
+    }
+    .close:hover,.close:focus{box-shadow:var(--ring); outline:none}
+
+    /* Focus visibility */
+    :focus-visible{ outline:none; box-shadow:var(--ring) }
+  </style>
+</head>
+<body>
+
+  <!-- ======================= NAV ======================= -->
+  <header>
+    <div class="nav" role="navigation" aria-label="Navegação principal">
+      <a class="brand" href="#top" aria-label="Página inicial">
+        <span class="brand-badge">BI</span>
+        <span>Becker Intelligent Solutions</span>
+      </a>
+      <nav>
+        <a href="#sobre">Quem somos</a>
+        <a href="#servicos">Serviços</a>
+        <a href="#diferenciais">Por que Becker</a>
+        <a href="#processo">Nosso processo</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <button class="cta" id="openContact" aria-haspopup="dialog" aria-controls="modalContato">Fale conosco</button>
+    </div>
+  </header>
+
+  <!-- ======================= HERO ======================= -->
+  <section class="hero" id="top" aria-label="Destaque">
+    <div class="hero-inner">
+      <span class="pill" aria-label="categoria">Soluções inteligentes • SC</span>
+      <h1>Projetamos e construímos sistemas que reduzem custos e elevam a qualidade — do desenho de arquitetura ao código que roda em produção.</h1>
+      <p class="subtitle">
+        Na BECKER INTELLIGENT SOLUTIONS LTDA, unimos engenharia de software, ciência de dados e design de produto para transformar objetivos de negócios em plataformas escaláveis.
+        Somos de Blumenau/SC e atuamos em projetos no Brasil inteiro.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#servicos" aria-label="Ver serviços">Ver serviços</a>
+        <a class="btn" href="#sobre" aria-label="Saiba mais sobre a empresa">Como trabalhamos</a>
+        <button class="btn" id="openContact2" aria-haspopup="dialog" aria-controls="modalContato">Solicitar proposta</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= SOBRE ======================= -->
+  <section id="sobre" aria-labelledby="sobre-title">
+    <div class="wrap">
+      <h2 class="section-title" id="sobre-title">Nossa essência</h2>
+      <p class="section-kicker">Tecnologia aplicada ao valor de negócio — sem jargões, com indicadores claros de sucesso.</p>
+
+      <div class="grid">
+        <div class="col-6">
+          <article class="card">
+            <div class="icon" aria-hidden="true">AI</div>
+            <h3>Quem somos</h3>
+            <p class="muted">
+              A Becker é uma consultoria especializada em <strong>Computer Systems Design</strong> que combina engenharia moderna, UX e automação.
+              Desde 2016, entregamos plataformas web, APIs e painéis analíticos que suportam alto tráfego e operam com observabilidade de ponta.
+            </p>
+            <p class="muted">
+              Trabalhamos com nuvem (AWS/GCP), containers, banco de dados relacional e NoSQL, filas de eventos e pipelines de dados.
+              Nosso estilo é pragmático: prototipamos rápido, validamos com usuários e só então escalamos.
+            </p>
+            <p class="muted">
+              Em cada projeto definimos metas mensuráveis (SLOs, tempo de carregamento, redução de custos, aumento de conversão) e relatamos o progresso com transparência.
+            </p>
+          </article>
+        </div>
+
+        <div class="col-6">
+          <article class="card">
+            <div class="icon" aria-hidden="true">QA</div>
+            <h3>Compromisso com qualidade</h3>
+            <p class="muted">
+              Qualidade nasce do processo: testes automatizados, revisão de código, infraestrutura como código e monitoramento contínuo.
+              Aplicamos acessibilidade (WCAG), segurança desde o design (OWASP) e privacidade por padrão.
+            </p>
+            <p class="muted">
+              A equipe é multidisciplinar: engenheiros, cientistas de dados, designers e PMs tecnicamente atuantes.
+              Essa combinação reduz riscos e acelera a entrega desde a descoberta até a operação em produção.
+            </p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= SERVIÇOS ======================= -->
+  <section id="servicos" aria-labelledby="servicos-title">
+    <div class="wrap">
+      <h2 class="section-title" id="servicos-title">O que entregamos na prática</h2>
+      <p class="section-kicker">Três frentes que cobrem da estratégia ao código, com métricas de impacto.</p>
+
+      <div class="grid">
+        <div class="col-4">
+          <article class="card">
+            <div class="icon" aria-hidden="true">UX</div>
+            <h3>Produtos Digitais & UX</h3>
+            <p class="muted">
+              Descoberta de produto, mapas de jornada e protótipos navegáveis.
+              Implementação de SPAs e PWAs acessíveis e ultra rápidas (Core Web Vitals).
+            </p>
+            <p class="muted">
+              Design systems reutilizáveis e documentação viva garantem consistência e velocidade.
+              Integramos analytics ético para orientar decisões sem invadir a privacidade.
+            </p>
+            <p class="muted">
+              Resultados: redução de abandono, maior conversão e satisfação do usuário medida por NPS/CSAT.
+            </p>
+          </article>
+        </div>
+
+        <div class="col-4">
+          <article class="card">
+            <div class="icon" aria-hidden="true">API</div>
+            <h3>Arquitetura & Plataformas</h3>
+            <p class="muted">
+              Desenho e implementação de backends resilientes (REST/GraphQL/eventos).
+              Observabilidade com logs estruturados, métricas e tracing distribuído.
+            </p>
+            <p class="muted">
+              Infraestrutura em nuvem com IaC, CI/CD, feature flags e blue/green.
+              SLOs e alertas significativos para operar com segurança.
+            </p>
+            <p class="muted">
+              Foco em custos: dimensionamento automático, caching e otimizações de banco.
+            </p>
+          </article>
+        </div>
+
+        <div class="col-4">
+          <article class="card">
+            <div class="icon" aria-hidden="true">ML</div>
+            <h3>Dados, IA & Automação</h3>
+            <p class="muted">
+              Pipelines de dados, modelagem e dashboards de governança.
+              Uso responsável de IA (classificação, recomendações, RAG) com trilhas de auditoria.
+            </p>
+            <p class="muted">
+              Robôs para tarefas repetitivas, integrações com ERPs/CRMs e webhooks.
+              Segurança de dados com criptografia e controle de acesso.
+            </p>
+            <p class="muted">
+              Metas claras: tempo economizado, acurácia de modelos e ROI tangível.
+            </p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= DIFERENCIAIS ======================= -->
+  <section id="diferenciais" class="band" aria-labelledby="dif-title">
+    <div class="wrap band-inner">
+      <div>
+        <h2 class="section-title" id="dif-title">Por que escolher a Becker</h2>
+        <p class="section-kicker">Três vantagens que nossos clientes mais mencionam.</p>
+
+        <div class="card">
+          <h3>⚡ Velocidade com segurança</h3>
+          <p class="muted">
+            Entregas quinzenais com demo ao vivo. Pipelines de CI/CD e ambientes isolados reduzem regressões e tempo de lead.
+          </p>
+        </div>
+        <br/>
+        <div class="card">
+          <h3>📊 Transparência orientada a métricas</h3>
+          <p class="muted">
+            OKRs claros, KPIs de produto e engenharia, e painel compartilhado de status — você sabe o que foi feito e o que vem a seguir.
+          </p>
+        </div>
+        <br/>
+        <div class="card">
+          <h3>🔒 Privacidade e conformidade</h3>
+          <p class="muted">
+            Privacidade por padrão, minimização de dados e conformidade com a LGPD. Sem coleta de telefone ou dados sensíveis na captação inicial.
+          </p>
+        </div>
+      </div>
+
+      <aside class="card" aria-label="Inscreva-se para novidades">
+        <h3>Boletim técnico</h3>
+        <p class="muted">Receba estudos de caso e guias práticos (1× por mês). Cancelamento simples a qualquer momento.</p>
+        <form onsubmit="event.preventDefault(); document.getElementById('msgNews').textContent='Obrigado! Verifique seu e-mail para confirmar.';">
+          <label for="news" class="muted">Seu e-mail corporativo</label>
+          <input id="news" class="input" type="email" name="email" required autocomplete="email" inputmode="email" aria-describedby="newsHelp" />
+          <small id="newsHelp" class="muted">Usaremos apenas para enviar o boletim.</small>
+          <div style="height:10px"></div>
+          <button class="cta" type="submit">Inscrever-se</button>
+          <div id="msgNews" aria-live="polite" class="muted" style="margin-top:10px"></div>
+        </form>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ======================= PROCESSO ======================= -->
+  <section id="processo" aria-labelledby="proc-title">
+    <div class="wrap">
+      <h2 class="section-title" id="proc-title">Como tiramos a ideia do papel</h2>
+      <p class="section-kicker">Três etapas enxutas, com saídas claras e decisões registradas.</p>
+
+      <div class="timeline">
+        <div class="step">
+          <h3>1) Descoberta guiada</h3>
+          <p class="muted">
+            Workshops curtos para mapear objetivos, restrições e usuários.
+            Resultado: escopo priorizado, métricas de sucesso e primeiros wireframes.
+          </p>
+        </div>
+        <div class="step">
+          <h3>2) Construção incremental</h3>
+          <p class="muted">
+            Sprint de implementação com versões navegáveis. Integrações com seus sistemas e ambiente de testes disponível para sua equipe.
+          </p>
+        </div>
+        <div class="step">
+          <h3>3) Go-live e evolução</h3>
+          <p class="muted">
+            Plano de lançamento seguro (feature flags/rollback), observabilidade e rota de melhorias baseada em dados de uso reais.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= FAQ (EXTRA BLOCO) ======================= -->
+  <section id="faq" aria-labelledby="faq-title">
+    <div class="wrap">
+      <h2 class="section-title" id="faq-title">Perguntas frequentes</h2>
+      <p class="section-kicker">Alguns esclarecimentos rápidos antes da primeira conversa.</p>
+
+      <div class="grid">
+        <div class="col-6">
+          <details>
+            <summary>Quais tecnologias a Becker utiliza?</summary>
+            <p class="muted">
+              Escolhemos a pilha ideal para o problema. Em geral, usamos TypeScript/Node, Python, Go, Postgres, Redis, Kafka, GraphQL/REST, React e infraestrutura AWS/GCP com Terraform.
+            </p>
+          </details>
+        </div>
+        <div class="col-6">
+          <details>
+            <summary>Como calculam investimento e prazos?</summary>
+            <p class="muted">
+              Estimamos por entregáveis e valor de negócio. Começamos pequeno (MVP) e revisitamos a cada ciclo, mantendo previsibilidade sem engessar o escopo.
+            </p>
+          </details>
+        </div>
+        <div class="col-6">
+          <details>
+            <summary>Vocês assinam NDA?</summary>
+            <p class="muted">
+              Sim. Temos um NDA padrão e também trabalhamos com o seu documento. Segurança e confidencialidade são requisitos básicos do nosso trabalho.
+            </p>
+          </details>
+        </div>
+        <div class="col-6">
+          <details>
+            <summary>Como tratam dados pessoais?</summary>
+            <p class="muted">
+              Coletamos apenas o necessário para contato (nome e e-mail). Armazenamos com criptografia e acessos mínimos. Você pode solicitar remoção a qualquer momento.
+            </p>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= CONTATO (MODAL) ======================= -->
+  <div class="modal" id="modalContato" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="contactTitle">
+    <div class="modal-card">
+      <div class="modal-head">
+        <h3 id="contactTitle">Vamos conversar sobre o seu projeto</h3>
+        <button class="close" data-close>Fechar</button>
+      </div>
+      <p class="muted">Preencha os campos. Não solicitamos telefone. Você receberá confirmação por e-mail.</p>
+
+      <form id="contactForm">
+        <label for="nome">Seu nome</label>
+        <input class="input" id="nome" name="nome" required autocomplete="name" />
+        <div style="height:10px"></div>
+
+        <label for="email">E-mail</label>
+        <input class="input" id="email" name="email" type="email" required autocomplete="email" inputmode="email" />
+        <div style="height:10px"></div>
+
+        <label for="assunto">Assunto</label>
+        <input class="input" id="assunto" name="assunto" placeholder="Ex.: Plataforma de dados, App web, Integrações" />
+        <div style="height:10px"></div>
+
+        <label for="mensagem">Como podemos ajudar?</label>
+        <textarea class="input" id="mensagem" name="mensagem" rows="5" required></textarea>
+        <div style="height:10px"></div>
+
+        <label>
+          <input type="checkbox" id="consent" required />
+          <span>Concordo que meus dados sejam usados para retorno deste contato (LGPD).</span>
+        </label>
+
+        <div style="display:flex; gap:10px; margin-top:14px">
+          <button class="cta" type="submit">Enviar mensagem</button>
+          <button class="btn" type="button" data-close>Cancelar</button>
+        </div>
+
+        <p id="formStatus" class="muted" aria-live="polite" style="margin-top:10px"></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Confirmação -->
+  <div class="modal" id="modalOK" role="alertdialog" aria-modal="true" aria-hidden="true" aria-labelledby="okTitle" aria-describedby="okDesc">
+    <div class="modal-card">
+      <div class="modal-head">
+        <h3 id="okTitle">Mensagem enviada</h3>
+        <button class="close" data-close>Fechar</button>
+      </div>
+      <p id="okDesc" class="muted">Obrigado! Em breve responderemos do endereço <strong>diego@beckerintelligentsolutions.org</strong>.</p>
+      <button class="cta" data-close>Entendi</button>
+    </div>
+  </div>
+
+  <!-- ======================= RODAPÉ / CONTATOS ======================= -->
+  <footer aria-label="Rodapé">
+    <div class="wrap">
+      <div class="grid">
+        <div class="col-6">
+          <strong>BECKER INTELLIGENT SOLUTIONS LTDA</strong><br/>
+          <span>Rua Valentim Fortunato Bonelli, 158, 89037-820, Blumenau, Santa Catarina</span><br/>
+          <span>E-mail: <a href="mailto:diego@beckerintelligentsolutions.org">diego@beckerintelligentsolutions.org</a></span>
+        </div>
+        <div class="col-6">
+          <p class="muted">
+            © <span id="year"></span> Becker Intelligent Solutions. Todos os direitos reservados.
+            Utilizamos apenas cookies técnicos essenciais; sem rastreadores de terceiros.
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ======================= SCRIPTS ======================= -->
+  <script>
+    // Atualiza ano
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Abrir/fechar modal de contato
+    const modal = document.getElementById('modalContato');
+    const modalOk = document.getElementById('modalOK');
+    const openers = [document.getElementById('openContact'), document.getElementById('openContact2')].filter(Boolean);
+    const form = document.getElementById('contactForm');
+    const statusEl = document.getElementById('formStatus');
+
+    function openModal(m){
+      m.setAttribute('aria-hidden','false');
+      // Move focus para o primeiro campo
+      const firstInput = m.querySelector('input, textarea, button');
+      if(firstInput){ setTimeout(()=> firstInput.focus(), 50); }
+    }
+    function closeModal(m){
+      m.setAttribute('aria-hidden','true');
+    }
+
+    openers.forEach(btn => btn.addEventListener('click', ()=> openModal(modal)));
+    document.querySelectorAll('[data-close]').forEach(btn => btn.addEventListener('click', (e)=>{
+      const dialog = e.target.closest('.modal');
+      if(dialog) closeModal(dialog);
+    }));
+    [modal, modalOk].forEach(m => {
+      m.addEventListener('click', (e)=>{ if(e.target === m) closeModal(m); });
+      m.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeModal(m); });
+    });
+
+    // Validação e "envio"
+    form.addEventListener('submit', async (e)=>{
+      e.preventDefault();
+      statusEl.textContent = '';
+
+      const data = {
+        nome: form.nome.value.trim(),
+        email: form.email.value.trim(),
+        assunto: form.assunto.value.trim(),
+        mensagem: form.mensagem.value.trim(),
+        consent: document.getElementById('consent').checked
+      };
+
+      if(!data.consent){
+        statusEl.textContent = 'É necessário aceitar o uso dos dados para retorno.';
+        return;
+      }
+
+      // Simula requisição de envio (sem terceiros, compatível com diretrizes da Apple)
+      try{
+        // Simulação local
+        await new Promise(r=> setTimeout(r, 600));
+        form.reset();
+        closeModal(modal);
+        openModal(modalOk);
+      }catch(err){
+        statusEl.textContent = 'Não foi possível enviar agora. Tente novamente em instantes.';
+      }
+    });
+
+    // Acessibilidade: evitar scroll de fundo quando modal aberto
+    const observer = new MutationObserver(()=>{
+      const anyOpen = [...document.querySelectorAll('.modal')].some(m => m.getAttribute('aria-hidden') === 'false');
+      document.body.style.overflow = anyOpen ? 'hidden' : '';
+    });
+    observer.observe(document.body, {subtree:true, attributes:true, attributeFilter:['aria-hidden']});
+  </script>
+
+</body>
+</html>
